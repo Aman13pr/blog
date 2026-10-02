@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DevBlog - Developer Blogging Platform</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header class="navbar">
+
+        <div class="logo">
+            Dev<span>Blog</span>
+        </div>
+
+        <nav>
+            <a href="#" onclick="showPage('home')">Home</a>
+            <a href="#" onclick="showPage('dashboard')">Dashboard</a>
+            <a href="#" onclick="showPage('create')">Write</a>
+            <a href="#" onclick="showPage('login')">Login</a>
+            <a href="#" onclick="showPage('register')" class="register-btn">
+                Register
+            </a>
+        </nav>
+
+    </header>
+
+
+    <!-- HOME PAGE -->
+    <section id="home" class="page active">
+
+        <div class="hero">
+
+            <h1>Learn. Write. <span>Share.</span></h1>
+
+            <p>
+                A developer community to share knowledge,
+                technical blogs and coding experiences.
+            </p>
+
+            <div class="search-box">
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search blogs..."
+                    onkeyup="searchBlogs()"
+                >
+
+                <button>Search</button>
+            </div>
+
+        </div>
+
+
+        <div class="container">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Latest Blogs</h2>
+                    <p>Explore articles written by developers.</p>
+                </div>
+
+                <button class="primary-btn" onclick="showPage('create')">
+                    + Write Blog
+                </button>
+
+            </div>
+
+
+            <div class="tags-filter">
+
+                <button onclick="filterBlogs('all')">All</button>
+
+                <button onclick="filterBlogs('javascript')">
+                    JavaScript
+                </button>
+
+                <button onclick="filterBlogs('react')">
+                    React
+                </button>
+
+                <button onclick="filterBlogs('node')">
+                    Node.js
+                </button>
+
+                <button onclick="filterBlogs('mongodb')">
+                    MongoDB
+                </button>
+
+            </div>
+
+
+            <div id="blogContainer" class="blog-grid">
+
+                <!-- Blog 1 -->
+
+                <article
+                    class="blog-card"
+                    data-category="react"
+                    data-title="Introduction to React"
+                >
+
+                    <div class="blog-tag">
+                        React
+                    </div>
+
+                    <h3>
+                        Introduction to React
+                    </h3>
+
+                    <p>
+                        Learn the fundamentals of React and understand
+                        how modern frontend applications are built.
+                    </p>
+
+                    <div class="blog-author">
+
+                        <div class="avatar">
+                            JD
+                        </div>
+
+                        <div>
+                            <strong>John Doe</strong>
+                            <small>5 min read • Oct 02, 2026</small>
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="read-btn"
+                        onclick="openBlog('Introduction to React')"
+                    >
+                        Read Article →
+                    </button>
+
+                </article>
+
+
+                <!-- Blog 2 -->
+
+                <article
+                    class="blog-card"
+                    data-category="javascript"
+                    data-title="Modern JavaScript"
+                >
+
+                    <div class="blog-tag yellow">
+                        JavaScript
+                    </div>
+
+                    <h3>
+                        Modern JavaScript Features
+                    </h3>
+
+                    <p>
+                        Explore ES6+ features including arrow functions,
+                        destructuring, promises and modules.
+                    </p>
+
+                    <div class="blog-author">
+
+                        <div class="avatar purple">
+                            AS
+                        </div>
+
+                        <div>
+                            <strong>Alex Smith</strong>
+                            <small>7 min read • Oct 01, 2026</small>
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="read-btn"
+                        onclick="openBlog('Modern JavaScript Features')"
+                    >
+                        Read Article →
+                    </button>
+
+                </article>
+
+
+                <!-- Blog 3 -->
+
+                <article
+                    class="blog-card"
+                    data-category="node"
+                    data-title="Node.js Backend"
+                >
+
+                    <div class="blog-tag green">
+                        Node.js
+                    </div>
+
+                    <h3>
+                        Building APIs with Node.js
+                    </h3>
+
+                    <p>
+                        Learn how to create scalable REST APIs using
+                        Node.js and Express.js.
+                    </p>
+
+                    <div class="blog-author">
+
+                        <div class="avatar orange">
+                            RK
+                        </div>
+
+                        <div>
+                            <strong>Rahul Kumar</strong>
+                            <small>8 min read • Sep 29, 2026</small>
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="read-btn"
+                        onclick="openBlog('Building APIs with Node.js')"
+                    >
+                        Read Article →
+                    </button>
+
+                </article>
+
+
+                <!-- Blog 4 -->
+
+                <article
+                    class="blog-card"
+                    data-category="mongodb"
+                    data-title="MongoDB Guide"
+                >
+
+                    <div class="blog-tag red">
+                        MongoDB
+                    </div>
+
+                    <h3>
+                        MongoDB for Beginners
+                    </h3>
+
+                    <p>
+                        Understand MongoDB collections, documents,
+                        queries and CRUD operations.
+                    </p>
+
+                    <div class="blog-author">
+
+                        <div class="avatar blue">
+                            MS
+                        </div>
+
+                        <div>
+                            <strong>Mike Smith</strong>
+                            <small>6 min read • Sep 28, 2026</small>
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="read-btn"
+                        onclick="openBlog('MongoDB for Beginners')"
+                    >
+                        Read Article →
+                    </button>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CREATE BLOG -->
+
+    <section id="create" class="page">
+
+        <div class="container">
+
+            <div class="page-title">
+
+                <h1>Write a New Blog</h1>
+
+                <p>
+                    Share your knowledge with the developer community.
+                </p>
+
+            </div>
+
+
+            <div class="editor">
+
+                <input
+                    type="text"
+                    id="blogTitle"
+                    placeholder="Blog title..."
+                >
+
+
+                <input
+                    type="text"
+                    id="blogTags"
+                    placeholder="Tags: React, JavaScript, Node.js"
+                >
+
+
+                <textarea
+                    id="blogContent"
+                    placeholder="Write your blog using Markdown..."
+                ></textarea>
+
+
+                <div class="editor-actions">
+
+                    <button
+                        class="draft-btn"
+                        onclick="saveDraft()"
+                    >
+                        Save Draft
+                    </button>
+
+                    <button
+                        class="primary-btn"
+                        onclick="publishBlog()"
+                    >
+                        Publish Blog
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- DASHBOARD -->
+
+    <section id="dashboard" class="page">
+
+        <div class="container">
+
+            <div class="dashboard-header">
+
+                <div>
+                    <h1>My Dashboard</h1>
+
+                    <p>
+                        Manage your blogs and drafts.
+                    </p>
+                </div>
+
+                <button
+                    class="primary-btn"
+                    onclick="showPage('create')"
+                >
+                    + Create Blog
+                </button>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <div>
+
+                    <h3>Introduction to React</h3>
+
+                    <span class="status published">
+                        Published
+                    </span>
+
+                </div>
+
+                <div class="dashboard-actions">
+
+                    <button>Edit</button>
+
+                    <button onclick="deleteBlog(this)">
+                        Delete
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <div>
+
+                    <h3>Learning Node.js</h3>
+
+                    <span class="status draft">
+                        Draft
+                    </span>
+
+                </div>
+
+                <div class="dashboard-actions">
+
+                    <button>Edit</button>
+
+                    <button onclick="deleteBlog(this)">
+                        Delete
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- LOGIN -->
+
+    <section id="login" class="page">
+
+        <div class="auth-container">
+
+            <div class="auth-card">
+
+                <h1>Welcome Back</h1>
+
+                <p>Login to continue to DevBlog.</p>
+
+
+                <form onsubmit="login(event)">
+
+                    <label>Email</label>
+
+                    <input
+                        type="email"
+                        id="loginEmail"
+                        placeholder="you@example.com"
+                        required
+                    >
+
+
+                    <label>Password</label>
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="••••••••"
+                        required
+                    >
+
+
+                    <button
+                        type="submit"
+                        class="primary-btn full"
+                    >
+                        Login
+                    </button>
+
+                </form>
+
+
+                <p class="auth-bottom">
+
+                    Don't have an account?
+
+                    <a href="#" onclick="showPage('register')">
+                        Register
+                    </a>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- REGISTER -->
+
+    <section id="register" class="page">
+
+        <div class="auth-container">
+
+            <div class="auth-card">
+
+                <h1>Create Account</h1>
+
+                <p>
+                    Join the developer community.
+                </p>
+
+
+                <form onsubmit="register(event)">
+
+                    <label>Full Name</label>
+
+                    <input
+                        type="text"
+                        id="registerName"
+                        placeholder="John Doe"
+                        required
+                    >
+
+
+                    <label>Email</label>
+
+                    <input
+                        type="email"
+                        id="registerEmail"
+                        placeholder="you@example.com"
+                        required
+                    >
+
+
+                    <label>Password</label>
+
+                    <input
+                        type="password"
+                        id="registerPassword"
+                        placeholder="Create a password"
+                        required
+                    >
+
+
+                    <button
+                        type="submit"
+                        class="primary-btn full"
+                    >
+                        Create Account
+                    </button>
+
+                </form>
+
+
+                <p class="auth-bottom">
+
+                    Already have an account?
+
+                    <a href="#" onclick="showPage('login')">
+                        Login
+                    </a>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- BLOG DETAILS -->
+
+    <section id="blogDetails" class="page">
+
+        <div class="container">
+
+            <article class="article">
+
+                <button
+                    class="back-btn"
+                    onclick="showPage('home')"
+                >
+                    ← Back to Blogs
+                </button>
+
+                <div class="article-tag">
+                    React
+                </div>
+
+                <h1 id="articleTitle">
+                    Introduction to React
+                </h1>
+
+                <div class="article-author">
+                    By John Doe • 5 min read
+                </div>
+
+
+                <hr>
+
+
+                <p>
+                    React is a popular JavaScript library for building
+                    modern user interfaces.
+                </p>
+
+
+                <h2>What is React?</h2>
+
+                <p>
+                    React allows developers to build reusable UI
+                    components and create fast interactive applications.
+                </p>
+
+
+                <h2>Example</h2>
+
+                <pre><code>
+function App() {
+    return &lt;h1&gt;Hello React&lt;/h1&gt;;
+}
+                </code></pre>
+
+
+                <h2>Conclusion</h2>
+
+                <p>
+                    React is widely used for creating modern web
+                    applications and developer tools.
+                </p>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROFILE -->
+
+    <section id="profile" class="page">
+
+        <div class="container">
+
+            <div class="profile-card">
+
+                <div class="profile-avatar">
+                    JD
+                </div>
+
+                <h1>John Doe</h1>
+
+                <p>
+                    Full Stack Developer • React • Node.js • MongoDB
+                </p>
+
+                <p class="bio">
+                    I love building web applications and sharing
+                    knowledge with other developers.
+                </p>
+
+
+                <h2>My Published Blogs</h2>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+
+        <div class="logo">
+            Dev<span>Blog</span>
+        </div>
+
+        <p>
+            Built for developers, by developers.
+        </p>
+
+        <p>
+            © 2026 DevBlog
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
